@@ -64,7 +64,7 @@ computed : {
 }
 ```
 
-## Usefull buil-in directives 
+## Usefull built-in directives 
 
 ### class 
 
@@ -148,14 +148,18 @@ The watcher will observe the ```todos```array of object.
 ```JavaScript 
   watch: {
 
-    todos: function(val){
+    todos: {
+      handler(val){
+       
+        localStorage.setItem( 'todos', JSON.stringify(this.todos) );
 
-      localStorage.setItem( 'todos', JSON.stringify(this.todos) );
-
-    }
+      },
+     deep: true // to watch nested element of the object otherwise it will be refresh only when a new array element will be added / deleted. 
 
   }
 ``` 
+
+
 **NB : Never use Arrow function (ES6) for watchers otherwise it will faill**
 
 > Why not using debounce for performance https://lodash.com/docs#debounce

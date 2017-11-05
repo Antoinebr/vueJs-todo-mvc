@@ -151,11 +151,15 @@ export default {
   },
   watch: {
 
-    todos: function(val){
+    todos: {
+      handler(val){
+       
+        localStorage.setItem( 'todos', JSON.stringify(this.todos) );
 
-      localStorage.setItem( 'todos', JSON.stringify(this.todos) );
+      },
+     deep: true // to watch nested element of the object
 
-    }
+  }
 
   },
 }
