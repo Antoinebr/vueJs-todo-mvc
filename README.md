@@ -122,6 +122,45 @@ We wrapped it with ```Vue.nextTick``` to apply this change at the next Vue DOM r
 
 NB Import Vue ```import Vue from 'vue';```
 
+
+<hr>
+
+## Offline Management
+
+## Created to get the data when the component is created
+
+```JavaScript 
+  created(){
+
+    let retrievedObject = localStorage.getItem('todos');
+
+    if( retrievedObject ) this.todos = JSON.parse(retrievedObject);
+
+  },
+```
+
+### Watchers to refresh the datas
+
+I chose to save the ```todos``` array of object  in the localstorage each time ```todos```is modified.
+
+The watcher will observe the ```todos```array of object.
+
+```JavaScript 
+  watch: {
+
+    todos: function(val){
+
+      localStorage.setItem( 'todos', JSON.stringify(this.todos) );
+
+    }
+
+  }
+``` 
+**NB : Never use Arrow function (ES6) for watchers otherwise it will faill**
+
+> Why not using debounce for performance https://lodash.com/docs#debounce
+
+
 <hr>
 
 ## Webpack

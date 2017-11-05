@@ -78,6 +78,8 @@ export default {
       this.editing = todo;
       this.oldTodo = todo.name;
 
+      
+
     },
 
     doneEdit(){
@@ -93,7 +95,7 @@ export default {
       this.doneEdit();
 
 
-    }
+    },
 
   },
   computed : {
@@ -139,7 +141,23 @@ export default {
 
     }
 
-  }
+  },
+  created(){
+
+      let retrievedObject = localStorage.getItem('todos');
+
+      if( retrievedObject ) this.todos = JSON.parse(retrievedObject);
+
+  },
+  watch: {
+
+    todos: function(val){
+
+      localStorage.setItem( 'todos', JSON.stringify(this.todos) );
+
+    }
+
+  },
 }
 </script>
 
