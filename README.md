@@ -2,6 +2,8 @@
 
 > A PWA vue TODO list
 
+[demo](https://todo.antoinebrossault.com) 
+
 ## Build Setup
 
 ``` bash
@@ -20,6 +22,12 @@ npm run build --report
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
  
+
+ ## Deploy 
+
+```bash
+ rsync -arv {$pathToProject}vue-todo/dist/ {$login}@{$serverIp}:/home/todo/ -e "ssh -p {$port}"
+ ```
  
  ## Computed properties
 
