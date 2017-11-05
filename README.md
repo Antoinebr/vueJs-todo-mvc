@@ -42,7 +42,7 @@ Here the checkbox send a value of ```true``` or ```false``` that's send to the s
 In this example we putt all the todo completed propoertie at true;
 
 ```html
-    <input type="checkbox" class="toggle-all" v-model="allDone">
+<input type="checkbox" class="toggle-all" v-model="allDone">
 ```
 
 ```js
@@ -85,14 +85,11 @@ We can add more than one Class
 This act like 
 
 ```JavaScript
-$('.el').( e => {
-    e.prventDefault();
-
-})
+$('.el').click( e =>  e.preventDefault() );
 ```
 
 ```html 
-     <button @click.prevent="deleteCompleteted()">Delete terminated tasks</button>
+<button @click.prevent="deleteCompleteted()">Delete terminated tasks</button>
  ```
 
 
@@ -109,15 +106,15 @@ We get two values from it ```el``` and ```value``` here we just add a focus to t
 We wrapped it with ```Vue.nextTick``` to apply this change at the next Vue DOM refresh
 
 ```JavaScript 
-  directives:{
+directives:{
 
-    focus (el,value){
+  focus (el,value){
 
-      if(value) Vue.nextTick( _ => el.focus() ); // nextTick == Next Dom refresh ( helot fix bug )
-
-    }
+    if(value) Vue.nextTick( _ => el.focus() ); // nextTick == Next Dom refresh ( helot fix bug )
 
   }
+
+}
 ```
 
 NB Import Vue ```import Vue from 'vue';```
@@ -130,13 +127,13 @@ NB Import Vue ```import Vue from 'vue';```
 ## Created to get the data when the component is created
 
 ```JavaScript 
-  created(){
+created(){
 
-    let retrievedObject = localStorage.getItem('todos');
+  let retrievedObject = localStorage.getItem('todos');
 
-    if( retrievedObject ) this.todos = JSON.parse(retrievedObject);
+  if( retrievedObject ) this.todos = JSON.parse(retrievedObject);
 
-  },
+},
 ```
 
 ### Watchers to refresh the datas
@@ -146,17 +143,17 @@ I chose to save the ```todos``` array of object  in the localstorage each time `
 The watcher will observe the ```todos```array of object.
 
 ```JavaScript 
-  watch: {
+watch: {
 
-    todos: {
-      handler(val){
-       
-        localStorage.setItem( 'todos', JSON.stringify(this.todos) );
+  todos: {
+    handler(val){
+      
+      localStorage.setItem( 'todos', JSON.stringify(this.todos) );
 
-      },
-     deep: true // to watch nested element of the object otherwise it will be refresh only when a new array element will be added / deleted. 
+    },
+    deep: true // to watch nested element of the object otherwise it will be refresh only when a new array element will be added / deleted. 
 
-  }
+}
 ``` 
 
 
@@ -178,4 +175,5 @@ module.exports = {
     assetsPublicPath: './',
 
   },
+}
   ```
