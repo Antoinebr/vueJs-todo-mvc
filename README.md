@@ -178,7 +178,7 @@ watch: {
 
 ## Webpack
 
-If the project will go in a directory in production edit the wbepackconfig
+If the project will go in a directory in production edit the webpackconfig
 
 ```JavaScript 
 module.exports = {
@@ -189,3 +189,36 @@ module.exports = {
   },
 }
   ```
+
+
+### Cache the Api response 
+
+To save the most up to date response of this request. Use the runtime caching
+```JavaScript 
+getData(){
+  fetch('https://api.punkapi.com/v2/beers/random')
+    .then( (response) => { 
+
+        return response.json();
+
+      }).then( res =>  this.beers = res );  
+  }
+)
+```
+
+Webpack config 
+
+```JavaScript 
+ new SWPrecacheWebpackPlugin({
+      cacheId: 'my-vue-app',
+      filename: 'service-worker.js',
+      staticFileGlobs: ['dist/**/*.{js,html,css}'],
+      minify: true,
+      stripPrefix: 'dist/',
+      // All requests from thsi domain will be cached, and refreshed when the app will be online
+      runtimeCaching: [{
+        urlPattern:  new RegExp('^https://api.punkapi.com'),
+        handler: "networkFirst"
+      }],
+    })
+```
