@@ -76,9 +76,21 @@ If the propertie ```filter``` is === to ```all``` my element will have the ```se
 
 We can add more than one Class 
 
-``` :class="{completed: todo.completed, editing: todo === editing}" ```
+```html  
+<div :class="{completed: todo.completed, editing: todo === editing}"></div> 
+```
+
+We can do ternary conditions :
+
+Here if ```blockingJs``` is in the ```recos```array the ```md-primary``` class will be added.
+**NB:** The ```md-fab``` class will be here all the time.
+
+```html
+<md-button :class="[recos.includes('blockingJs') ? 'md-primary' : '', 'md-fab' ]" @click.prevent=" addReco('blockingJs')">
+```
 
 
+<hr>
 
 ### @click.prevent 
 
@@ -92,7 +104,7 @@ $('.el').click( e =>  e.preventDefault() );
 <button @click.prevent="deleteCompleteted()">Delete terminated tasks</button>
  ```
 
-
+<hr>
 
 ## Custom Directive 
 
